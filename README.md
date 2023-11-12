@@ -28,3 +28,4 @@ THEN I am again presented with current and future conditions for that city
 - Created remote repository and cloned to local respository. 
 - Created root files and titled HTML page. 
 - Created input form. 
+- Created contianers and unique names for for output data. 
