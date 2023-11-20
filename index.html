@@ -1,38 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather Dashboard</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        
-        <h1>Weather Dashboard</h1>
-    
+      <h1>Weather Dashboard</h1>
     </header>
 
-    <main>
-        <form action="Search for a City">
-            
-            <label for="search">Search for a City:</label><br>
-            <input type="search" id="search" name="search"><br>
-            <input type="submit" value="Search">
-
-        </form>
-        <section class="searchHistory">
-            <!-- Containter for search history.  -->
-        </section>
-        <section>
-            <!-- Continer for search output -->
-            <div id="currentConditions">
-                <!-- Container for current weather conditions-->
-            </div>
-            <div id="fiveDay">
-                <!-- Container for 5 day forcast -->
-            </div>
-        </section>
-
-    </main>
-</body>
+    <form action="Search for a City">
+      <label for="search">Search for a City:</label><br />
+      <input type="search" id="search" name="search" value="Chicago"/><br />
+      <input type="button" value="Search" />
+    </form>
+    <aside class="searchHistory">
+      <!-- Containter for search history.  -->
+    </aside>
+    <section>
+      <!-- Continer for search output -->
+      <div id="currentConditions">
+        <!-- Container for current weather conditions-->
+      </div>
+      <div id="fiveDay">
+        <!-- Container for 5 day forcast -->
+      </div>
+    </section>
+    <script src="./assets/js/script.js"></script>
+  </body>
 </html>
