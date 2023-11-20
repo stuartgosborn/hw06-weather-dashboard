@@ -1,6 +1,6 @@
 console.log("connected");
 let userFormEl = document.getElementById("user-form");
-console.log(userFormEl)
+console.log(userFormEl);
 let searchInput = document.getElementById("search-input");
 let searchButton = document.getElementById("search-button");
 let historyContainer = document.getElementById("history-container");
@@ -8,7 +8,7 @@ let currentContainer = document.getElementById("current-container");
 let cityWeatherSearch = document.getElementById("search-term");
 let fivedayContainer = document.getElementById("fiveday-container");
 
-var formSubmitHandler = function(event){
+var formSubmitHandler = function (event) {
   event.preventDefault();
 
   let search = searchInput.value.trim();
@@ -25,18 +25,19 @@ var formSubmitHandler = function(event){
 
 var getWeather = function (city) {
   let apiKey = "825dda9ae5ba6a08a48bbade32e85c41";
-  let weatherAPI = `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${apiKey}`;
+  let weatherApi = `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${apiKey}`;
   console.log(city);
 
-  fetch(weatherAPI)
+  fetch(weatherApi)
     .then(function (response) {
       if (response.ok) {
         console.log(response);
         response.json().then(function (data) {
           console.log(data);
-          displayCurrentWeather(data, city);
 
-          // Append proper desired information to page
+          displayCurrentWeather(data, city);
+          let { lat, lon } = data.coord;
+          getForcast(lat, lon);
         });
       } else {
         alert("Error:" + response.statusText);
@@ -46,10 +47,8 @@ var getWeather = function (city) {
       alert("Unable to get weather.");
     });
 };
-
 let displayCurrentWeather = function (data, city) {
-  
-  console.log(city)
+  console.log(city);
   date = new Date();
   console.log(date);
   let month = date.getMonth() + 1;
@@ -92,4 +91,28 @@ let displayCurrentWeather = function (data, city) {
     liEL[i].setAttribute("style", "list-style-type: none");
   }
 };
+
+var getForcast = function (lat, lon) {
+  let apiKey = "825dda9ae5ba6a08a48bbade32e85c41";
+  let forcastApi = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+
+  fetch(forcastApi)
+    .then(function (response) {
+      if (response.ok) {
+        console.log(response);
+        response.json().then(function (data) {
+          console.log(data);
+
+          displayForcast(lat, lon);
+        });
+      } else {
+        alert("Error:" + response.statusText);
+      }
+    })
+    .catch(function (error) {
+      alert(`Unable to get forcast.`);
+    });
+};
+
+
 userFormEl.addEventListener("submit", formSubmitHandler);
