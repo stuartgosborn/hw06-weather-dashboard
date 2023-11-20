@@ -97,16 +97,16 @@ var getForcast = function (lat, lon) {
   let forcastApi = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
   fetch(forcastApi)
-    .then(function (response) {
-      if (response.ok) {
-        console.log(response);
-        response.json().then(function (data) {
-          console.log(data);
+    .then(function (fresponse) {
+      if (fresponse.ok) {
+        console.log(fresponse);
+        fresponse.json().then(function (fdata) {
+          console.log(fdata);
 
-          displayForcast(lat, lon);
+          displayForcast(fresponse, fdata);
         });
       } else {
-        alert("Error:" + response.statusText);
+        alert("Error:" + fresponse.statusText);
       }
     })
     .catch(function (error) {
@@ -114,5 +114,17 @@ var getForcast = function (lat, lon) {
     });
 };
 
+var displayForcast = function (fresponse, fdata) {
+  var forcastHeader = document.createElement("h3");
+  forcastHeader.textContent = "5-Day Forecast";
+  fivedayContainer.appendChild(forcastHeader);
+  console.log(fdata);
+  console.log(fdata.list[i].main.temp);
+  number[] tempArray = fdata.list[i].main.temp
+  for (let i = 0; i < tempArray.length; i++8) {
+    const element = array[i];
+    
+  }
+};
 
 userFormEl.addEventListener("submit", formSubmitHandler);
