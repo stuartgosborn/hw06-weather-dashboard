@@ -10,20 +10,21 @@
       <h1>Weather Dashboard</h1>
     </header>
 
-    <form action="Search for a City">
-      <label for="search">Search for a City:</label><br />
-      <input type="search" id="search" name="search" value="Chicago"/><br />
-      <input type="button" value="Search" />
+    <form id="user-form" class="card-body">
+      <label for="search-input">Search for a City:</label><br />
+      <input type="text" id="search-input" name="search-input" autofocus="true"/>
+      <button type="submit" class="btn">Search</button>
     </form>
-    <aside class="searchHistory">
+    <aside id="history-container">
       <!-- Containter for search history.  -->
     </aside>
     <section>
       <!-- Continer for search output -->
-      <div id="currentConditions">
+      <div id="current-container">
+        <p id="search-term"></p>
         <!-- Container for current weather conditions-->
       </div>
-      <div id="fiveDay">
+      <div id="fiveday-container">
         <!-- Container for 5 day forcast -->
       </div>
     </section>
