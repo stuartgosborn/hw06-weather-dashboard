@@ -12,7 +12,7 @@
     </header>
     <div id="weatherContainer">
       <form action="getWeather" id="user-form" class="card-body">
-        <label for="destination">Search for a City:</label><br />
+        <label for="destination"><h3>Search for a City:</h3></label><br />
         <input
           type="text"
           id="destination"
@@ -25,17 +25,16 @@
       <aside id="searchHistory">
         <!-- Continer for search history -->
 
-        <h2>Search History</h2>
+        <h3>Search History</h3>
         <p id="search-term"></p>
       </aside>
       <!-- Container for current weather conditions-->
       <section id="currentWeather">
-        <h2>Current Weather</h2>
+        <h2 style="display: block">Current Weather</h2>
       </section>
       <!-- Containter for forecast.  -->
-      <section id="forecastedWeather">
-        <h2>5-Day Forecast:</h2>
-      </section>
+      <h3 id="forecastHeader" style="display: block">5-Day Forecast:</h3>
+      <section id="forecastedWeather"></section>
     </div>
     <script src="./assets/js/script.js"></script>
   </body>

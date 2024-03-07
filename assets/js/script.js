@@ -8,6 +8,8 @@ let currentContainer = document.getElementById("currentWeather");
 let cityWeatherSearch = document.getElementById("search-term");
 let fivedayContainer = document.getElementById("forecastedWeather");
 
+
+
 var formSubmitHandler = function (event) {
   event.preventDefault();
 
@@ -37,7 +39,7 @@ var getWeather = function (city) {
 
           displayCurrentWeather(data, city);
           let { lat, lon } = data.coord;
-          getForcast(lat, lon);
+          getForecast(lat, lon);
         });
       } else {
         alert("Error:" + response.statusText);
@@ -72,18 +74,21 @@ let displayCurrentWeather = function (data, city) {
   currentContainer.appendChild(cityDateEl);
 
   var conditionsEl = document.createElement("ul");
+  conditionsEl.innerHTML = `<img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" alt="weather icon"> `
   currentContainer.appendChild(conditionsEl);
+   
+
 
   var tempConditionsEl = document.createElement("li");
-  tempConditionsEl.textContent = tempFFF;
+  tempConditionsEl.textContent = `Temp: ${tempFFF}`;
   conditionsEl.appendChild(tempConditionsEl);
 
   var windCondtionsEL = document.createElement("li");
-  windCondtionsEL.textContent = windF;
+  windCondtionsEL.textContent = `Wind: ${windF}`;
   conditionsEl.appendChild(windCondtionsEL);
 
   var humidityConditionsEl = document.createElement("li");
-  humidityConditionsEl.textContent = humidityF;
+  humidityConditionsEl.textContent = `Humidity: ${humidityF}`;
   conditionsEl.appendChild(humidityConditionsEl);
 
   var liEL = document.querySelectorAll("li");
@@ -92,38 +97,78 @@ let displayCurrentWeather = function (data, city) {
   }
 };
 
-var getForcast = function (lat, lon) {
+function getForecast(lat, lon) {
   let apiKey = "825dda9ae5ba6a08a48bbade32e85c41";
   let forcastApi = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
   fetch(forcastApi)
-    .then(function (fresponse) {
-      if (fresponse.ok) {
-        console.log(fresponse);
-        fresponse.json().then(function (fdata) {
-          console.log(fdata);
+    .then(function (response) {
+      if (response.ok) {
+        console.log(response);
+        response.json().then(function (data) {
+          console.log(data);
 
-          displayForcast(fresponse, fdata);
+          displayForcast(response, data);
         });
       } else {
-        alert("Error:" + fresponse.statusText);
+        alert("Error:" + response.statusText);
       }
     })
     .catch(function (error) {
       alert(`Unable to get forcast.`);
     });
-};
+}
 
-var displayForcast = function (fresponse, fdata) {
-  var forcastHeader = document.createElement("h2");
-  forcastHeader.textContent = "5-Day Forecast:";
-  fivedayContainer.appendChild(forcastHeader);
-  console.log(fdata);
-  console.log(fdata.list[i].main.temp);
-  let tempArray = fdata.list[i].main.temp
-  for (let i = 0; i < tempArray.length; i++) {
-    const element = array[i];
+
+var displayForcast = function (response, data) {
+  let forecastArr = data.list;
+  console.log(forecastArr);
+  // var forcastHeader = document.createElement("h3");
+  // forcastHeader.textContent = "5-Day Forecast:";
+  // fivedayContainer.appendChild(forcastHeader);
+  console.log(data);
+
+  for (let i = 0; i < 5; i++) {
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    let year = date.getFullYear();
+    let cityDate = ` ${month}/${day + i + 1}/${year}`;
+    let forecastCard = document.createElement("span");
+
+    fivedayContainer.appendChild(forecastCard);
+
+    let forecastDateEl = document.createElement("h3");
+    forecastDateEl.textContent = cityDate;
+    forecastCard.appendChild(forecastDateEl);
+
+    var conditionsEl = document.createElement("ul");
     
+    conditionsEl.innerHTML = `<img src="https://openweathermap.org/img/wn/${forecastArr[i].weather[0].icon}@2x.png" alt="weather icon"> `
+    forecastCard.appendChild(conditionsEl);
+
+    let temp = forecastArr[i].main.temp;
+    let tempF = 1.8 * (temp - 273) + 32;
+    let tempFF = tempF.toFixed(2);
+    let tempFFF = `${tempFF}\u00B0 F`;
+    let tempConditionsEl = document.createElement("li");
+    tempConditionsEl.setAttribute("style", "list-style-type: none");
+    tempConditionsEl.textContent = `Temp: ${tempFFF}`;
+    conditionsEl.appendChild(tempConditionsEl);
+
+    let wind = forecastArr[i].wind.speed;
+    let windF = `${wind} MPH`;
+    let humidity = forecastArr[i].main.humidity;
+    let humidityF = `${humidity}%`;
+
+    var windCondtionsEL = document.createElement("li");
+    windCondtionsEL.setAttribute("style", "list-style-type: none");
+    windCondtionsEL.textContent = `Wind: ${windF}`;
+    conditionsEl.appendChild(windCondtionsEL);
+
+    var humidityConditionsEl = document.createElement("li");
+    humidityConditionsEl.setAttribute("style", "list-style-type: none");
+    humidityConditionsEl.textContent = `Humidity: ${humidityF}`;
+    conditionsEl.appendChild(humidityConditionsEl);
   }
 };
 
