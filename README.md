@@ -23,10 +23,17 @@ WHEN I click on a city in the search history
 THEN I am again presented with current and future conditions for that city
 ```
 
-## Action Steps
+## Screen Shot
 
-- Created remote repository and cloned to local respository. 
-- Created root files and titled HTML page. 
-- Created input form. 
-- Created contianers and unique names for for output data. 
-- Working on request API
+![alt text](image.png)
+
+## Links
+
+Git Hub Repository  
+
+
+https://github.com/stuartgosborn/hw06-weather-dashboard  
+
+Deployed Page  
+
+https://stuartgosborn.github.io/hw06-weather-dashboard/  

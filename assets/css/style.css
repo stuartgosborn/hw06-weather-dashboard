@@ -30,7 +30,7 @@ header {
   min-height: 780px;
   width: 200px;
   flex: 0 0 30%;
-  border: 2px solid red;
+ 
 }
 
 #currentWeather {
@@ -87,9 +87,13 @@ li {
 #destination {
   width: 194px;
   margin-bottom: 5px;
+  border-radius: 5px ;
 }
 
-#getForecast {
+button, #getForecast {
   width: 200px;
   margin-bottom: 5px;
+  background-color: rgba(52, 107, 202, 0.744);
+  color: white;
+  border-radius: 5px ;
 }

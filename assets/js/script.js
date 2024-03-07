@@ -13,17 +13,29 @@ let fivedayContainer = document.getElementById("forecastedWeather");
 var formSubmitHandler = function (event) {
   event.preventDefault();
 
-  let search = searchInput.value.trim();
+  let search = searchInput.value.trim() ;
+  currentContainer.textContent = "";
+  fivedayContainer.textContent = "";
+  searchInput.value = "";
 
   if (search) {
     getWeather(search);
-    currentContainer.textContent = "";
-    fivedayContainer.textContent = "";
-    searchInput.value = "";
+    storeSearch(search)
+  } else if(event.target.textContent){
+    getWeather(event.target.textContent)
   } else {
     alert("Please enter a city/location.");
   }
 };
+
+function storeSearch(search){
+  localStorage.setItem('city', search)
+  
+  let searchHistBtn = document.createElement('button');
+  searchHistBtn.textContent = search;
+  searchHistBtn.style.backgroundColor = 'gray';
+  historyContainer.appendChild(searchHistBtn);
+}
 
 var getWeather = function (city) {
   let apiKey = "825dda9ae5ba6a08a48bbade32e85c41";
@@ -172,4 +184,5 @@ var displayForcast = function (response, data) {
   }
 };
 
+historyContainer.addEventListener('click', formSubmitHandler)
 searchButton.addEventListener("click", formSubmitHandler);
