@@ -133,9 +133,6 @@ function getForecast(lat, lon) {
 var displayForcast = function (response, data) {
   let forecastArr = data.list;
   console.log(forecastArr);
-  // var forcastHeader = document.createElement("h3");
-  // forcastHeader.textContent = "5-Day Forecast:";
-  // fivedayContainer.appendChild(forcastHeader);
   console.log(data);
 
   for (let i = 0; i < 5; i++) {
