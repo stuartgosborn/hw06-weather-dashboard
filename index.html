@@ -4,32 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
   </head>
   <body>
     <header>
       <h1>Weather Dashboard</h1>
     </header>
+    <div id="weatherContainer">
+      <form action="getWeather" id="user-form" class="card-body">
+        <label for="destination">Search for a City:</label><br />
+        <input
+          type="text"
+          id="destination"
+          name="destination"
+          value="Chicago"
+          autofocus="true"
+        />
+        <input type="button" id="getForecast" value="Search" />
+      </form>
+      <aside id="searchHistory">
+        <!-- Continer for search history -->
 
-    <form id="user-form" class="card-body">
-      <label for="search-input">Search for a City:</label><br />
-      <input type="text" id="search-input" name="search-input" autofocus="true"/>
-      <button type="submit" class="btn">Search</button>
-    </form>
-    <section>
-      <!-- Continer for search output -->
-      <div id="current-container">
+        <h2>Search History</h2>
         <p id="search-term"></p>
-        <!-- Container for current weather conditions-->
-      </div>
-      <div id="fiveday-container">
-        <!-- Container for 5 day forcast -->
-
-      </div>
-    </section>
-    <aside id="history-container">
-      <!-- Containter for search history.  -->
-    </aside>
-
+      </aside>
+      <!-- Container for current weather conditions-->
+      <section id="currentWeather">
+        <h2>Current Weather</h2>
+      </section>
+      <!-- Containter for forecast.  -->
+      <section id="forecastedWeather">
+        <h2>5-Day Forecast:</h2>
+      </section>
+    </div>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>

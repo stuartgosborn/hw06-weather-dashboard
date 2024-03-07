@@ -1,12 +1,12 @@
 console.log("connected");
 let userFormEl = document.getElementById("user-form");
 console.log(userFormEl);
-let searchInput = document.getElementById("search-input");
-let searchButton = document.getElementById("search-button");
-let historyContainer = document.getElementById("history-container");
-let currentContainer = document.getElementById("current-container");
+let searchInput = document.getElementById("destination");
+let searchButton = document.getElementById("getForecast");
+let historyContainer = document.getElementById("searchHistory");
+let currentContainer = document.getElementById("currentWeather");
 let cityWeatherSearch = document.getElementById("search-term");
-let fivedayContainer = document.getElementById("fiveday-container");
+let fivedayContainer = document.getElementById("forecastedWeather");
 
 var formSubmitHandler = function (event) {
   event.preventDefault();
@@ -115,16 +115,16 @@ var getForcast = function (lat, lon) {
 };
 
 var displayForcast = function (fresponse, fdata) {
-  var forcastHeader = document.createElement("h3");
-  forcastHeader.textContent = "5-Day Forecast";
+  var forcastHeader = document.createElement("h2");
+  forcastHeader.textContent = "5-Day Forecast:";
   fivedayContainer.appendChild(forcastHeader);
   console.log(fdata);
   console.log(fdata.list[i].main.temp);
-  number[] tempArray = fdata.list[i].main.temp
-  for (let i = 0; i < tempArray.length; i++8) {
+  let tempArray = fdata.list[i].main.temp
+  for (let i = 0; i < tempArray.length; i++) {
     const element = array[i];
     
   }
 };
 
-userFormEl.addEventListener("submit", formSubmitHandler);
+searchButton.addEventListener("click", formSubmitHandler);
