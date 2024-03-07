@@ -12,15 +12,18 @@ var formSubmitHandler = function (event) {
   event.preventDefault();
 
   let search = searchInput.value.trim();
-  currentContainer.textContent = "";
-  fivedayContainer.textContent = "";
-  searchInput.value = "";
-
+  
   if (search) {
     getWeather(search);
     storeSearch(search);
+    currentContainer.textContent = "";
+    fivedayContainer.textContent = "";
+    searchInput.value = "";
   } else if (event.target.textContent) {
     getWeather(event.target.textContent);
+    currentContainer.textContent = "";
+    fivedayContainer.textContent = "";
+    searchInput.value = "";
   } else {
     alert("Please enter a city/location.");
   }
@@ -37,7 +40,7 @@ function storeSearch(search) {
 
 var getWeather = function (city) {
   let apiKey = "825dda9ae5ba6a08a48bbade32e85c41";
-  let weatherApi = `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${apiKey}`;
+  let weatherApi = `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${apiKey}`;
   console.log(city);
 
   fetch(weatherApi)
