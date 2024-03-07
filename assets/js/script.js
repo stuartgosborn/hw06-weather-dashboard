@@ -8,32 +8,30 @@ let currentContainer = document.getElementById("currentWeather");
 let cityWeatherSearch = document.getElementById("search-term");
 let fivedayContainer = document.getElementById("forecastedWeather");
 
-
-
 var formSubmitHandler = function (event) {
   event.preventDefault();
 
-  let search = searchInput.value.trim() ;
+  let search = searchInput.value.trim();
   currentContainer.textContent = "";
   fivedayContainer.textContent = "";
   searchInput.value = "";
 
   if (search) {
     getWeather(search);
-    storeSearch(search)
-  } else if(event.target.textContent){
-    getWeather(event.target.textContent)
+    storeSearch(search);
+  } else if (event.target.textContent) {
+    getWeather(event.target.textContent);
   } else {
     alert("Please enter a city/location.");
   }
 };
 
-function storeSearch(search){
-  localStorage.setItem('city', search)
-  
-  let searchHistBtn = document.createElement('button');
+function storeSearch(search) {
+  localStorage.setItem("city", search);
+
+  let searchHistBtn = document.createElement("button");
   searchHistBtn.textContent = search;
-  searchHistBtn.style.backgroundColor = 'gray';
+  searchHistBtn.style.backgroundColor = "gray";
   historyContainer.appendChild(searchHistBtn);
 }
 
@@ -86,10 +84,8 @@ let displayCurrentWeather = function (data, city) {
   currentContainer.appendChild(cityDateEl);
 
   var conditionsEl = document.createElement("ul");
-  conditionsEl.innerHTML = `<img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" alt="weather icon"> `
+  conditionsEl.innerHTML = `<img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" alt="weather icon"> `;
   currentContainer.appendChild(conditionsEl);
-   
-
 
   var tempConditionsEl = document.createElement("li");
   tempConditionsEl.textContent = `Temp: ${tempFFF}`;
@@ -131,7 +127,6 @@ function getForecast(lat, lon) {
     });
 }
 
-
 var displayForcast = function (response, data) {
   let forecastArr = data.list;
   console.log(forecastArr);
@@ -154,8 +149,8 @@ var displayForcast = function (response, data) {
     forecastCard.appendChild(forecastDateEl);
 
     var conditionsEl = document.createElement("ul");
-    
-    conditionsEl.innerHTML = `<img src="https://openweathermap.org/img/wn/${forecastArr[i].weather[0].icon}@2x.png" alt="weather icon"> `
+
+    conditionsEl.innerHTML = `<img src="https://openweathermap.org/img/wn/${forecastArr[i].weather[0].icon}@2x.png" alt="weather icon"> `;
     forecastCard.appendChild(conditionsEl);
 
     let temp = forecastArr[i].main.temp;
@@ -184,5 +179,11 @@ var displayForcast = function (response, data) {
   }
 };
 
-historyContainer.addEventListener('click', formSubmitHandler)
+historyContainer.addEventListener("click", (event) => {
+  console.log(event.target.type);
+  if (`${event.target.type}` === 'submit') {
+    formSubmitHandler(event);
+  } 
+  return
+});
 searchButton.addEventListener("click", formSubmitHandler);
